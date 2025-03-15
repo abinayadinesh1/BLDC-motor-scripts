@@ -1,6 +1,16 @@
 from pymodbus.client import ModbusSerialClient
 import time
 
+client = ModbusSerialClient(
+    port='/dev/ttyUSB0',  # Adjust if your device is different
+    baudrate=9600,
+    bytesize=8,
+    parity='N',
+    stopbits=1,
+    timeout=1
+)
+
+
 registers_to_test = [
     (0x0056, "Speed setting"),
     (0x0066, "Motor running status"),
@@ -22,7 +32,7 @@ registers_to_test = [
 for reg, name in registers_to_test:
     try:
         print(f"\nReading {name} (register 0x{reg:04X})...")
-        result = client.read_holding_registers(reg, 1)
+        result = client.read_holding_registers(reg)
         if result and hasattr(result, 'registers'):
             print(f"Success! Value: {result.registers[0]}")
         else:
