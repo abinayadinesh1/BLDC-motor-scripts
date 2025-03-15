@@ -11,6 +11,8 @@ client = ModbusSerialClient(
     timeout=1
 )
 
+clear_fault = client.write_register(0x0076, 0)
+print(f"Clear fault result: {clear_fault}")
 
 # Set to internal mode (Modbus control)
 print("Setting to internal mode...")
@@ -20,9 +22,6 @@ print(f"Set mode result: {mode_set}")
 # Save the parameters
 save = client.write_register(0x80FF, 0x55AA)
 print(f"Save parameters result: {save}")
-
-clear_fault = client.write_register(0x0076, 0)
-print(f"Clear fault result: {clear_fault}")
 
 # Set starting torque higher
 torque_set = client.write_register(0x00D6, 30)  # Higher than default
