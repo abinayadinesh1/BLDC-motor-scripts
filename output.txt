@@ -1,0 +1,8 @@
+Connection status:  True
+Fault cleared:  WriteSingleRegisterResponse(dev_id=1, transaction_id=0, address=118, count=0, bits=[], registers=[0], status=1)
+Speed set to {speed}:  WriteSingleRegisterResponse(dev_id=1, transaction_id=0, address=86, count=0, bits=[], registers=[1000], status=1)
+Parameters saved.
+Motor started:  WriteSingleRegisterResponse(dev_id=1, transaction_id=0, address=102, count=0, bits=[], registers=[1], status=1)
+Motor running for 5 seconds...
+Motor stopped:  WriteSingleRegisterResponse(dev_id=1, transaction_id=0, address=102, count=0, bits=[], registers=[0], status=1)
+

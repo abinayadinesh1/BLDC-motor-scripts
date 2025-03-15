@@ -23,7 +23,7 @@ if connection:
     try:
         # Read motor status (register 0x0066)
         print("\nReading motor status...")
-        status = client.read_holding_registers(0x0066, 1, unit=1)
+        status = client.read_holding_registers(0x0066)
         if status and hasattr(status, 'registers'):
             status_code = status.registers[0]
             status_desc = {
@@ -38,7 +38,7 @@ if connection:
         
         # Read actual motor speed (register 0x005F)
         print("\nReading actual motor speed...")
-        speed = client.read_holding_registers(0x005F, 1, unit=1)
+        speed = client.read_holding_registers(0x005F)
         if speed and hasattr(speed, 'registers'):
             print(f"Actual motor speed: {speed.registers[0]} RPM")
         else:
@@ -46,7 +46,7 @@ if connection:
         
         # Read fault codes (register 0x0076)
         print("\nReading fault codes...")
-        fault = client.read_holding_registers(0x0076, 1, unit=1)
+        fault = client.read_holding_registers(0x0076)
         if fault and hasattr(fault, 'registers'):
             fault_code = fault.registers[0]
             fault_desc = {
@@ -66,7 +66,7 @@ if connection:
         
         # Read internal temperature (register 0x0096)
         print("\nReading internal temperature...")
-        temp = client.read_holding_registers(0x0096, 1, unit=1)
+        temp = client.read_holding_registers(0x0096)
         if temp and hasattr(temp, 'registers'):
             print(f"Internal temperature: {temp.registers[0]}°C")
         else:
@@ -74,7 +74,7 @@ if connection:
         
         # Read actual motor voltage (register 0x00C6)
         print("\nReading motor voltage...")
-        voltage = client.read_holding_registers(0x00C6, 1, unit=1)
+        voltage = client.read_holding_registers(0x00C6)
         if voltage and hasattr(voltage, 'registers'):
             actual_voltage = voltage.registers[0] / 4  # According to manual, divide by 4
             print(f"Actual motor voltage: {actual_voltage}V")
@@ -97,7 +97,7 @@ if connection:
         time.sleep(2)
         
         # Read status again
-        status = client.read_holding_registers(0x0066, 1, unit=1)
+        status = client.read_holding_registers(0x0066)
         if status and hasattr(status, 'registers'):
             status_code = status.registers[0]
             print(f"Motor status after start command: {status_desc.get(status_code, f'Unknown ({status_code})')}")
@@ -105,7 +105,7 @@ if connection:
             print("Failed to read motor status after start command")
         
         # Read actual speed again
-        speed = client.read_holding_registers(0x005F, 1, unit=1)
+        speed = client.read_holding_registers(0x005F)
         if speed and hasattr(speed, 'registers'):
             print(f"Actual motor speed after start command: {speed.registers[0]} RPM")
         else:
