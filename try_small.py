@@ -32,10 +32,10 @@ start = client.write_register(0x0066, 2)
 
 # Wait and check actual speed
 time.sleep(2)
-speed = client.read_holding_registers(0x005F, 1)
+speed = client.read_holding_registers(0x005F)
 print(f"Actual speed: {speed.registers[0] if hasattr(speed, 'registers') else 'Unknown'}")
 
-fault = client.read_holding_registers(0x0076, 1)
+fault = client.read_holding_registers(0x0076)
 if hasattr(fault, 'registers'):
     fault_code = fault.registers[0]
     fault_desc = {
