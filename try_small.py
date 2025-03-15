@@ -21,6 +21,9 @@ print(f"Set mode result: {mode_set}")
 save = client.write_register(0x80FF, 0x55AA)
 print(f"Save parameters result: {save}")
 
+clear_fault = client.write_register(0x0076, 0)
+print(f"Clear fault result: {clear_fault}")
+
 # Set starting torque higher
 torque_set = client.write_register(0x00D6, 30)  # Higher than default
 
