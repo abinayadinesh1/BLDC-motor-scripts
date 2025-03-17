@@ -1,0 +1,29 @@
+from pymodbus.client import ModbusSerialClient
+import time
+
+client = ModbusSerialClient(
+    port="/dev/ttyUSB0",  
+    baudrate=9600,
+    bytesize=8,
+    parity="N",
+    stopbits=1,
+    timeout=1,
+    method="rtu"
+)
+connected = client.connect()
+print("Client is connected:", connected)
+# Write speed setting (register 0x56 = 86, value 0x03E8 = 1000)
+# 01 06 00 56 03 E8 corresponds to setting speed to 1000RPM
+result1 = client.write_register(address=0x56, value=0x03E8, slave=1)
+
+# Small delay between operations
+time.sleep(0.1)
+
+# Start motor forward rotation (register 0x66 = 102, value 0x0001 = 1)
+# 01 06 00 66 00 01 corresponds to making the motor rotate forward
+result2 = client.write_register(address=0x66, value=0x0001, slave=1)
+
+print(f"Speed register write result: {result1}")
+print(f"Forward rotation register write result: {result2}")
+
+client.close()
